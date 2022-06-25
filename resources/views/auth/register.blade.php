@@ -12,11 +12,11 @@
         <form method="POST" action="{{ route('register') }}">
             @csrf
 
-            <!-- Name -->
+            <!-- ID -->
             <div>
-                <x-label for="name" :value="__('Name')" />
+                <x-label for="id" :value="__('ID')" />
 
-                <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
+                <x-input id="id" class="block mt-1 w-full" type="text" name="id" :value="old('id')" required autofocus />
             </div>
 
             <!-- Email Address -->
@@ -24,6 +24,34 @@
                 <x-label for="email" :value="__('Email')" />
 
                 <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
+            </div>
+
+            <!-- Name -->
+            <div>
+                <x-label for="name" :value="__('Name')" />
+
+                <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
+            </div>
+
+            <!-- Surame -->
+            <div>
+                <x-label for="surname" :value="__('Surname')" />
+
+                <x-input id="surname" class="block mt-1 w-full" type="text" name="surname" :value="old('surname')" required autofocus />
+            </div>
+            
+            <!-- Department -->
+            <div>
+                <x-label for="department" :value="__('Department')" />
+
+                <x-input id="department" class="block mt-1 w-full" type="text" name="department" :value="old('department')" required autofocus />
+            </div>
+
+            <!-- Role -->
+            <div>
+                <x-label for="role" :value="__('Role')" />
+
+                <x-input id="role" class="block mt-1 w-full" type="text" name="role" :value="old('role')" required autofocus />
             </div>
 
             <!-- Password -->
