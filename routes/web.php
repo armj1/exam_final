@@ -32,3 +32,15 @@ require __DIR__.'/auth.php';
 
 
 Route::get('/dashboard', [dashboardController::class, 'index'])->name('dashboard');
+
+Route::get('/userManagement', function () {
+    return view('userManagement');
+})->middleware(['auth']);
+
+Route::get('/taskManagement', function () {
+    return view('taskManagement');
+})->middleware(['auth']);
+
+Route::get('/reportManagement', function () {
+    return view('reportManagement');
+})->middleware(['auth']);

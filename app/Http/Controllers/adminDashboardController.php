@@ -1,11 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
-use App\Models\User;
 
-class dashboardController extends Controller
+use Illuminate\Http\Request;
+
+class adminDashboardController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,10 +13,7 @@ class dashboardController extends Controller
      */
     public function index()
     {
-        if(Auth::user()->role == '1'){
-            return view('adminDashboard');
-        }
-        return view('userDashboard');
+        //
     }
 
     /**
