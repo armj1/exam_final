@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('reports', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('employee_ID')->references('employee_id')->on('tasks')->onDelete('cascade');;
-            $table->foreignId('task_ID')->references('id')->on('tasks')->onDelete('cascade');;
+            $table->foreignId('employee_ID')->references('employee_id')->on('tasks')->cascadeOnDelete();;
+            $table->foreignId('task_ID')->references('id')->on('tasks')->cascadeOnDelete();;
             $table->string('file');
             $table->timestamps();
         });
