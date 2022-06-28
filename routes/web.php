@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\dashboardController;
+use App\Http\Controllers\userController;
+use App\Http\Controllers\Auth\RegisteredUserController;
 
 
 /*
@@ -35,12 +37,32 @@ Route::get('/dashboard', [dashboardController::class, 'index'])->name('dashboard
 
 Route::get('/userManagement', function () {
     return view('userManagement');
-})->middleware(['auth']);
+})->middleware(['admin']);
 
 Route::get('/taskManagement', function () {
     return view('taskManagement');
-})->middleware(['auth']);
+})->middleware(['admin']);
 
 Route::get('/reportManagement', function () {
     return view('reportManagement');
-})->middleware(['auth']);
+})->middleware(['admin']);
+
+Route::get('/listUsers', [userController::class, 'index'])->middleware(['admin']);
+
+Route::get('/register', function () {
+    return view('auth.register');
+})->middleware(['admin'])->name('register');
+
+Route::post('register',[RegisteredUserController::class, 'store'])->middleware(['admin']);
+
+Route::get('/DeleteUpdateUser', [userController::class, 'DeleteUpdateIndex'])->middleware(['admin']);
+
+Route::delete('/DeleteUpdateUsers/{id}', [userController::class, 'destroy'])->middleware(['admin']);
+
+Route::get('updateUser/{id}', [userController::class, 'edit'])->middleware(['admin']);
+
+Route::put('updateUsers/{id}', [userController::class, 'update'])->middleware(['admin']);
+
+
+
+
