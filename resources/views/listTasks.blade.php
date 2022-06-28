@@ -14,22 +14,16 @@
                     @if (count($tasks) == 0)
                         <p><strong> Looks like there are no assigned tasks (or maybe all of them are deleted)!</strong></p>
                     @else
-                    <table  style="border:1px solid black; width:100%; border-collapse:separate; padding:8px">
-                    <tr>
-                        <td><strong>ID</strong></td>
-                        <td><strong>User ID</strong></td>
-                        <td><strong>Description</strong></td>
-                        <td><strong>Term</strong></td>
-                    </tr>
                     @foreach($tasks as $task)
+                    <div style="margin-bottom:20px;   border-bottom: 2px solid grey;">
                     <tr>
-                        <td>{{$task->id}}</td>                        
-                        <td>{{$task->employee_ID}}</td>
-                        <td>{{$task->description}}</td>
-                        <td>{{$task->term}}</td>
+                        <td><strong>ID: </strong>{{$task->id}}</td><br>                    
+                        <td><strong>User ID: </strong>{{$task->employee_ID}}</td><br>
+                        <td><strong>Description: </strong>{{$task->description}}</td><br>
+                        <td><strong>Term: </strong>{{$task->term}}</td><br>
                     </tr>
+                    </div>
                     @endforeach
-                    </table>
                     @endif
                 </div>
             </div>

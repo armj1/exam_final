@@ -5,7 +5,7 @@ use App\Http\Controllers\dashboardController;
 use App\Http\Controllers\userController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\taskController;
-
+use App\Http\Controllers\reportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,9 +44,7 @@ Route::get('/taskManagement', function () {
     return view('taskManagement');
 })->middleware(['admin']);
 
-Route::get('/reportManagement', function () {
-    return view('reportManagement');
-})->middleware(['admin']);
+
 
 Route::get('/listUsers', [userController::class, 'index'])->middleware(['admin']);
 
@@ -78,5 +76,7 @@ Route::delete('/DeleteUpdateTasks/{id}', [taskController::class, 'destroy'])->mi
 
 Route::put('updateTasks/{id}', [taskController::class, 'update'])->middleware(['admin']);
 
+Route::get('/reportManagement',  [reportController::class, 'index'])->middleware(['admin']);
 
+Route::delete('/reportManagements/{id}', [reportController::class, 'destroy'])->middleware(['admin']);
 

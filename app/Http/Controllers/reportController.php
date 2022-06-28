@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Report;
 use Illuminate\Http\Request;
 
 class reportController extends Controller
@@ -13,7 +13,8 @@ class reportController extends Controller
      */
     public function index()
     {
-        //
+        $reports=Report::all();
+        return view('reportManagement',['reports' => $reports]);
     }
 
     /**
@@ -79,6 +80,7 @@ class reportController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Report::where('id',$id)->delete();
+        return redirect('/reportManagement');
     }
 }
