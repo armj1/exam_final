@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Task;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class taskController extends Controller
 {
@@ -13,7 +14,8 @@ class taskController extends Controller
      */
     public function index()
     {
-        //
+        $tasks=Task::all();
+        return view('listTasks',['tasks' => $tasks]);
     }
 
     /**
@@ -23,7 +25,7 @@ class taskController extends Controller
      */
     public function create()
     {
-        //
+        return view('assignTask');
     }
 
     /**
@@ -33,8 +35,25 @@ class taskController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {        
+        $request->validate([
+            'id' => ['required', 'unique:tasks'],
+            'employee_ID' => ['required','exists:users,id'],            
+            'description' => ['required', 'string', 'max:255'],
+            'term' => ['required','string', 'max:255'],
+        
+
+        ]);
+
+        $task = Task::create([
+            'id' => $request->id,            
+            'employee_ID' => $request->employee_ID,
+            'description' => $request->description,
+            'term'  => $request->term,
+        ]);
+        
+        
+        return redirect('assignTask');
     }
 
     /**
@@ -56,7 +75,8 @@ class taskController extends Controller
      */
     public function edit($id)
     {
-        //
+        $tasks = DB::select('select * from tasks where id = ?', [$id]);
+        return view('updateTask',['tasks' => $tasks]);
     }
 
     /**
@@ -68,7 +88,18 @@ class taskController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $task=Task::find($id);
+        $task->description = $request->input('description');
+        $task->term = $request->input('term');
+
+        $request->validate([       
+            'description' => ['required', 'string', 'max:255'],
+            'term' => ['required', 'string', 'max:255'],
+        ]);
+
+        $task->save();
+
+        return redirect('/DeleteUpdateTask');
     }
 
     /**
@@ -79,6 +110,12 @@ class taskController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Task::where('id',$id)->delete();
+        return redirect('/DeleteUpdateTask');
+    }
+
+    public function DeleteUpdateIndex(){
+        $tasks=Task::all();
+        return view('DeleteUpdateTask',['tasks' => $tasks]);
     }
 }

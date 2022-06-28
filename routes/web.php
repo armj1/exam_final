@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\dashboardController;
 use App\Http\Controllers\userController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\taskController;
 
 
 /*
@@ -63,6 +64,19 @@ Route::get('updateUser/{id}', [userController::class, 'edit'])->middleware(['adm
 
 Route::put('updateUsers/{id}', [userController::class, 'update'])->middleware(['admin']);
 
+Route::get('/listTasks', [taskController::class, 'index'])->middleware(['admin']);
+
+Route::get('/assignTask', [taskController::class, 'create'])->middleware(['admin']);
+
+Route::post('/assignTask',[taskController::class, 'store'])->middleware(['admin']);
+
+Route::get('/DeleteUpdateTask', [taskController::class, 'DeleteUpdateIndex'])->middleware(['admin']);
+
+Route::get('updateTask/{id}', [taskController::class, 'edit'])->middleware(['admin']);
+
+Route::delete('/DeleteUpdateTasks/{id}', [taskController::class, 'destroy'])->middleware(['admin']);
+
+Route::put('updateTasks/{id}', [taskController::class, 'update'])->middleware(['admin']);
 
 
 
