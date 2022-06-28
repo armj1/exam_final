@@ -16,7 +16,7 @@
                         <br>
                         <p><strong> Nothing is assigned to you at this moment!</strong></p>
                     @else
-                    To send report, click "Send a report" button under the task. When you are finished, you can delete task that<br>
+                    To send report, click "Send a report" button under the task. When you are finished, you can hide task that<br>
                     you've done and carry on to the next one without distraction and clutter!<br><br>
                     @foreach($tasks as $task)
                         <tr>
@@ -24,14 +24,8 @@
                             <td><strong>Description of task: </strong>{{$task->description}}</td><br>
                             <td><strong>Term: </strong>{{$task->term}}</td><br>
                             <td><form>
-                                <a button type="button" style="border:1px solid black; padding:5px; width:15%; float:left; text-align:center" href="sendReport/{{$task->id}}">Send a report</a>
-                            </form></td></tr>       
-                            <td><form action="{{action([App\Http\Controllers\taskController::class, 'destroyForUser'], $task->id) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" style="border:1px solid black; padding:5px; margin-left:10px; width:15%; ">Delete</button>
-                            </form></td><br></tr>   
-
+                                <a button type="button" style="border:1px solid black; padding:5px; width:15%; float:left; text-align:center; margin-bottom:10px" href="sendReport/{{$task->id}}">Send a report</a>
+                            </form></td></tr>          
                     @endforeach
                     @endif
                 </div>

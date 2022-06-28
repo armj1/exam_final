@@ -84,5 +84,5 @@ Route::get('sendReport/{id}', [reportController::class, 'create'])->middleware([
 
 Route::post('sendReport',[reportController::class, 'store'])->middleware(['auth']);
 
-Route::delete('/dashboard/{id}', [taskController::class, 'destroyForUser'])->middleware(['auth']);
+
 
