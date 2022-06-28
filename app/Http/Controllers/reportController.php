@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Report;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class reportController extends Controller
 {
@@ -16,15 +17,17 @@ class reportController extends Controller
         $reports=Report::all();
         return view('reportManagement',['reports' => $reports]);
     }
+    
 
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        //
+        $tasks = DB::select('select * from tasks where id = ?', [$id]);
+        return view('sendReport',['tasks' => $tasks]);
     }
 
     /**
@@ -35,7 +38,22 @@ class reportController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'id' => ['required', 'unique:reports'],
+            'employee_ID' => ['required','exists:users,id'],  
+            'task_ID' => ['required','unique:reports'],             
+            'file' => ['required', 'string', 'max:255'],
+        ]);
+
+        $report = Report::create([
+            'id' => $request->input('id'),            
+            'employee_ID' => $request->input('employee_ID'),
+            'task_ID' => $request->input('task_ID'),
+            'file'  => $request->input('file'),
+        ]);
+        
+        
+        return redirect('dashboard');
     }
 
     /**
@@ -83,4 +101,6 @@ class reportController extends Controller
         Report::where('id',$id)->delete();
         return redirect('/reportManagement');
     }
+
+    
 }

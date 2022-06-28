@@ -9,6 +9,13 @@ class Report extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'id',
+        'employee_ID',        
+        'task_ID',
+        'file',
+    ];
+
     public function task()
     {
         return $this->belongsTo(Task::class);

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Task;
 
 class dashboardController extends Controller
 {
@@ -17,8 +18,14 @@ class dashboardController extends Controller
         if(Auth::user()->role == '1'){
             return view('adminDashboard');
         }
-        return view('userDashboard');
+        if(Auth::user()->role == '2'){
+            $id=Auth::user()->id;
+            $tasks=Task::where('employee_ID','=', $id) ->get();
+            return view('userDashboard',['tasks' => $tasks]);
+        }
     }
+
+
 
     /**
      * Show the form for creating a new resource.

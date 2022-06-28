@@ -80,3 +80,9 @@ Route::get('/reportManagement',  [reportController::class, 'index'])->middleware
 
 Route::delete('/reportManagements/{id}', [reportController::class, 'destroy'])->middleware(['admin']);
 
+Route::get('sendReport/{id}', [reportController::class, 'create'])->middleware(['auth']);
+
+Route::post('sendReport',[reportController::class, 'store'])->middleware(['auth']);
+
+Route::delete('/dashboard/{id}', [taskController::class, 'destroyForUser'])->middleware(['auth']);
+

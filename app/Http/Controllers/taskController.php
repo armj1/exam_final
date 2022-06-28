@@ -118,4 +118,9 @@ class taskController extends Controller
         $tasks=Task::all();
         return view('DeleteUpdateTask',['tasks' => $tasks]);
     }
+
+    public function destroyForUser($id){
+        Task::where('id',$id)->delete();
+        return redirect('dashboard');
+    }
 }
